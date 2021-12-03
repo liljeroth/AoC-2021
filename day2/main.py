@@ -1,9 +1,5 @@
 #!/usr/bin/python3
 
-# Day 2
-# 1: 1638335023 (3m 50s)
-# 2: 1638335238 (5m 54s)
-
 # Read input file
 day_file = open('input','r')
 c = day_file.read().split('\n')[:-1]

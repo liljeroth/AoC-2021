@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 
-# 1: 1638335023 (3m 43s)
-# 2: 1638335238 (7m 18s)
-
 # Read input file
-day_file = open('day1_input','r')
+day_file = open('input','r')
 c = day_file.read().split('\n')[:-1]
 
 # Convert to int
