@@ -44,13 +44,14 @@ print('Answer part 1: ', s1)
 
 # Solve part 2
 # 351900 too low
+# 900426 too high
 
 def get_basin(m, i, j, r):
 	b = [[i,j]]
 	
 	if i > 0:
 
-		if int(c[i][j]) == int(c[i-1][j]) - 1 and int(c[i-1][j]) < 9:
+		if int(c[i][j]) < int(c[i-1][j]) and int(c[i-1][j]) < 9:
 			b.append([i-1, j])
 			
 			if r == True:
@@ -62,7 +63,7 @@ def get_basin(m, i, j, r):
 	
 	if i < len(c) - 1:
 	
-		if int(c[i][j]) == int(c[i+1][j]) - 1 and int(c[i+1][j]) < 9:
+		if int(c[i][j]) < int(c[i+1][j]) and int(c[i+1][j]) < 9:
 			b.append([i+1, j])
 			
 			if r == True:
@@ -74,7 +75,7 @@ def get_basin(m, i, j, r):
 	
 	if j > 0:
 	
-		if int(c[i][j]) == int(c[i][j-1]) - 1 and int(c[i][j-1]) < 9:
+		if int(c[i][j]) < int(c[i][j-1]) and int(c[i][j-1]) < 9:
 			b.append([i, j-1])
 			
 			if r == True:
@@ -86,16 +87,17 @@ def get_basin(m, i, j, r):
 	
 	if j < len(c[i]) - 1:
 	
-		if int(c[i][j]) == int(c[i][j+1]) - 1 and int(c[i][j+1]) < 9:
+		if int(c[i][j]) < int(c[i][j+1]) and int(c[i][j+1]) < 9:
 			b.append([i, j+1])
 			
 			if r == True:
 				t = get_basin(m, i, j+1, r)
+				
 				if len(t) > 1:
 					for n in t[1:]:
 						if n not in b:
 							b.append(n)
-				
+	
 	return b
 
 basins = []
@@ -106,9 +108,15 @@ for k in range(0, len(low_points)):
 	j = int(low_points[k][1])
 	
 	b = get_basin(c, i, j, True)
-	basins.append(b)
 	
-	lengths.append(len(b))
+	t = []
+	for d in b:
+		if not d in t:
+			t.append(d)
+			
+	basins.append(t)
+	
+	lengths.append(len(t))
 
 s2 = 1
 for s in sorted(lengths, reverse=True)[:3]:
